@@ -5,11 +5,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer, { rootSaga } from './modules';
-import { tempSetUser, check } from './modules/user';
+import { check, tempSetUser } from './modules/user';
 
 // 리덕스 사가 만들고 변수에 담음
 const sagaMiddleware = createSagaMiddleware();
@@ -25,6 +25,9 @@ function loadUser() {
     // 브라우저의 로컬스토리지에서 user를 찾아서 user변수에 담음
     const user = localStorage.getItem('user');
     if (!user) return; // 로그인 상태가 아니라면 아무것도 안함
+
+    // 방금 얻은 user를 담아서 디스페치 -> 위의 액션에 의해 리듀서의 스테이트에 user를 저장
+    store.dispatch(tempSetUser(user));
 
     /*
     store.dispatch(tempSetUser(user)); 실행 흐름
@@ -43,17 +46,20 @@ function loadUser() {
       user,
     }),
      */
-    // 위에서 얻은 user를 담아서 디스페치 -> 위의 액션에 의해 리듀서의 스테이트에 user를 저장
-    store.dispatch(tempSetUser(user));
+
+    // /api/auth/check 주소로 get요청을 보내고 응답 결과를 state에 저장.
+    store.dispatch(check());
 
     /*
     store.dispatch(check()); 실행 흐름
 
-    // CHECK의 엑션 타입은 'user/CHECK'
-    modules/user.js
-    const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] = createRequestActionTypes(
-    'user/CHECK',
-    );
+    export const createRequestActionTypes = type => {
+      const SUCCESS = `${type}_SUCCESS`;
+      const FAILURE = `${type}_FAILURE`;
+      return [type, SUCCESS, FAILURE];
+  };
+
+// 위 함수 리턴되는거 그대로 받아서 CHECK, CHECK_SUCCESS, CHECK_FAILURE에 넣음.
 
     // 리듀서 액션 등록
     modules/user.js
@@ -73,7 +79,7 @@ function loadUser() {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
 
-  // 제네레이터 함수는 yield 붙은 작업이 끝나고, 호출을 해 주면 리턴값 내뱉고 다음으로 진행함
+  // 제네레이터 함수는 yield 붙은 작업이 끝나고, 호출을 해 주면 리턴값(객체로) 내뱉고 다음으로 진행함
   return function*(action) {
   // put은 dispatch와 동일
     yield put(startLoading(type)); // 로딩 시작
@@ -94,11 +100,9 @@ function loadUser() {
     }
     yield put(finishLoading(type)); // 로딩 끝
   };
-  }
-     */
+ }
+*/
 
-    // 상기흐름에 따라 /api/auth/check 주소로 get요청을 보내고 응답 결과를 state에 저장.
-    store.dispatch(check());
   } catch (e) {
     console.log('localStorage is not working');
   }

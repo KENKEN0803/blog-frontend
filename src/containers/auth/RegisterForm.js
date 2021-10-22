@@ -84,7 +84,7 @@ const RegisterForm = ({ history }) => {
 
   return (
     <AuthForm
-      type="register"
+      type='register'
       form={form}
       onChange={onChange}
       onSubmit={onSubmit}

@@ -19,8 +19,8 @@ const buttonStyle = css`
   }
 
   ${props =>
-    props.fullWidth &&
-    css`
+  props.fullWidth &&
+  css`
       padding-top: 0.75rem;
       padding-bottom: 0.75rem;
       width: 100%;
@@ -28,8 +28,8 @@ const buttonStyle = css`
     `}
 
   ${props =>
-    props.cyan &&
-    css`
+  props.cyan &&
+  css`
       background: ${palette.cyan[5]};
       &:hover {
         background: ${palette.cyan[4]};

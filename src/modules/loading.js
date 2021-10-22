@@ -9,13 +9,15 @@ const FINISH_LOADING = 'loading/FINISH_LOADING';
 
 export const startLoading = createAction(
   START_LOADING,
-  requestType => requestType
+  requestType => requestType,
 );
 
 export const finishLoading = createAction(
   FINISH_LOADING,
-  requestType => requestType
+  requestType => requestType,
 );
+
+// 액션 이름 정의, 페이로드 쓰겠다 설정
 
 const initialState = {};
 
@@ -23,14 +25,15 @@ const loading = handleActions(
   {
     [START_LOADING]: (state, action) => ({
       ...state,
-      [action.payload]: true
+      [action.payload]: true,
     }),
     [FINISH_LOADING]: (state, action) => ({
       ...state,
-      [action.payload]: false
-    })
+      [action.payload]: false,
+    }),
   },
-  initialState
+  initialState,
 );
+// 설정된 액션에 따라 스테이트의 로딩 상태를 트루나 폴스로 변경
 
 export default loading;

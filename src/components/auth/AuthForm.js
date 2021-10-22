@@ -56,7 +56,7 @@ const ButtonWithMarginTop = styled(Button)`
 
 const textMap = {
   login: '로그인',
-  register: '회원가입'
+  register: '회원가입',
 };
 
 /**
@@ -76,26 +76,26 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
       <h3>{text}</h3>
       <form onSubmit={onSubmit}>
         <StyledInput
-          autoComplete="username"
-          name="username"
-          placeholder="아이디"
+          autoComplete='username'
+          name='username'
+          placeholder='아이디'
           onChange={onChange}
           value={form.username}
         />
         <StyledInput
-          autoComplete="new-password"
-          name="password"
-          placeholder="비밀번호"
-          type="password"
+          autoComplete='new-password'
+          name='password'
+          placeholder='비밀번호'
+          type='password'
           onChange={onChange}
           value={form.password}
         />
         {type === 'register' && (
           <StyledInput
-            autoComplete="new-password"
-            name="passwordConfirm"
-            placeholder="비밀번호 확인"
-            type="password"
+            autoComplete='new-password'
+            name='passwordConfirm'
+            placeholder='비밀번호 확인'
+            type='password'
             onChange={onChange}
             value={form.passwordConfirm}
           />
@@ -107,9 +107,9 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
       </form>
       <Footer>
         {type === 'login' ? (
-          <Link to="/register">회원가입</Link>
+          <Link to='/register'>회원가입</Link>
         ) : (
-          <Link to="/login">로그인</Link>
+          <Link to='/login'>로그인</Link>
         )}
       </Footer>
     </AuthFormBlock>

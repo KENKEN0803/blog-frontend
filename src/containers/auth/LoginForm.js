@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { changeField, initializeForm, login } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
@@ -64,7 +64,7 @@ const LoginForm = ({ history }) => {
 
   return (
     <AuthForm
-      type="login"
+      type='login'
       form={form}
       onChange={onChange}
       onSubmit={onSubmit}
