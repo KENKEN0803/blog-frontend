@@ -15,6 +15,6 @@ const rootReducer = combineReducers({
 export function* rootSaga() {
   yield all([authSaga(), userSaga()]);
 }
-// yield all 은 제너레이터 함수들이 병행적으로 동시에 실행되고, 전부 resolve될때까지 기다린다.
+// yield all 은 제너레이터 함수들이 병행적으로 동시에 실행되고, 전부 resolve 될때까지 기다린다.
 
 export default rootReducer;

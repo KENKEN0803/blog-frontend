@@ -1,7 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { finishLoading, startLoading } from '../modules/loading';
 
-// 이런건 그냥 하드코딩하지 ㅅㅂ
+// 인수로 받은 문자열 뒤에 _성공 _실패 붙여서 리턴해줌.
 export const createRequestActionTypes = type => {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;

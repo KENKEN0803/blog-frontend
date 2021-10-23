@@ -31,6 +31,7 @@ const WhiteBox = styled.div`
     font-weight: bold;
     letter-spacing: 2px;
   }
+
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
   padding: 2rem;
   width: 360px;
@@ -39,11 +40,17 @@ const WhiteBox = styled.div`
 `;
 
 const AuthTemplate = ({ children }) => {
+  {/*
+      칠드런엔 아래 컴포넌트가 들어가게됨
+      <LoginForm />
+      <RegisterForm />
+      */
+  }
   return (
     <AuthTemplateBlock>
       <WhiteBox>
         <div className='logo-area'>
-          <Link to='/'>REACTERS</Link>
+          <Link to='/'>REACTORS</Link>
         </div>
         {children}
       </WhiteBox>

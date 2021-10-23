@@ -7,13 +7,9 @@ import * as authAPI from '../lib/api/auth';
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 
-const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes(
-  'auth/REGISTER',
-);
+const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes('auth/REGISTER');
 
-const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
-  'auth/LOGIN',
-);
+const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes('auth/LOGIN');
 
 /*
 export const createRequestActionTypes = type => {
@@ -33,6 +29,7 @@ export const changeField = createAction(
   }),
 );
 // 페이로드 안에 들어있는 form, key, value를 디스트럭팅 문법으로 꺼낸다.
+
 export const initializeForm = createAction(INITIALIZE_FORM, form => form); // register / login
 export const register = createAction(REGISTER, ({ username, password }) => ({ username, password, }));
 export const login = createAction(LOGIN, ({ username, password }) => ({ username, password, }));
@@ -45,6 +42,10 @@ export function* authSaga() {
   yield takeLatest(REGISTER, registerSaga);
   yield takeLatest(LOGIN, loginSaga);
 }
+// takeLastes 는 첫번째 파라메타로 액션, 두번째 파라메타로 함수를 받음.
+// 기존에 진행 중이던 작업이 있다면 취소 처리하고 가장 마지막으로 실행된 작업만 수행한다.
+// 응답이 아직 안왔는데 또 버튼을 누르는것을 방지할 수 있다. 요청이 중복돼서 날아가는것을 방지.
+
 
 const initialState = {
   register: {
@@ -64,6 +65,8 @@ const auth = handleActions(
   {
     [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
       produce(state, draft => {
+        // immer를 쓰면 스프레드 오퍼레이터 안써도 됨.
+        // immer의 produce 함수에는 첫번째는 수정하고 싶은 상태, 두번째는 어떻게 업데이트하고 싶을지 정의하는 함수를 넣어줌.
         draft[form][key] = value; // 예: state.register.username을 바꾼다
       }),
     [INITIALIZE_FORM]: (state, { payload: form }) => ({

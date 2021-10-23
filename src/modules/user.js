@@ -68,6 +68,7 @@ function checkFailureSaga() {
 function* logoutSaga() {
   try {
     yield call(authAPI.logout); // logout API 호출
+    // 끝날때 까지 기다렸다 아랫줄 실행
     localStorage.removeItem('user'); // localStorage 에서 user 제거
   } catch (e) {
     console.log(e);
@@ -82,6 +83,7 @@ export function* userSaga() {
 }
 // takeLastes 는 첫번째 파라메타로 액션, 두번째 파라메타로 함수를 받음.
 // 기존에 진행 중이던 작업이 있다면 취소 처리하고 가장 마지막으로 실행된 작업만 수행한다.
+// 응답이 아직 안왔는데 또 버튼을 누르는것을 방지할 수 있다. 요청이 중복돼서 날아가는것을 방지.
 
 const initialState = {
   user: null,
@@ -112,4 +114,4 @@ export default handleActions(
   },
   initialState,
 );
-// 4개 액션 모두 수행결과를 스테이트에 넣음.
+// 4개 액션 모두 단순히 수행결과를 스테이트에 넣는 리듀서.

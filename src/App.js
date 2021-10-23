@@ -14,6 +14,7 @@ const App = () => {
       <Route component={LoginPage} path='/login' />
       <Route component={RegisterPage} path='/register' />
       <Route component={WritePage} path='/write' />
+      {/* PostPage 컴포넌트 안에서 username 파라메터를 받겠다. */}
       <Route component={PostPage} path='/@:username/:postId' />
     </>
   );

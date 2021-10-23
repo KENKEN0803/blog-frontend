@@ -11,12 +11,12 @@ export const startLoading = createAction(
   START_LOADING,
   requestType => requestType,
 );
+// 액션 이름 정의, 페이로드 쓰겠다 설정
 
 export const finishLoading = createAction(
   FINISH_LOADING,
   requestType => requestType,
 );
-
 // 액션 이름 정의, 페이로드 쓰겠다 설정
 
 const initialState = {};
@@ -34,6 +34,6 @@ const loading = handleActions(
   },
   initialState,
 );
-// 설정된 액션에 따라 스테이트의 로딩 상태를 트루나 폴스로 변경
+// 액션에 따라 스테이트의 로딩 상태를 트루나 폴스로 변경. 끝
 
 export default loading;

@@ -70,7 +70,22 @@ const ErrorMessage = styled.div`
 `;
 
 const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
+  /*
+      <AuthForm
+      type='register' 또는 type='login'
+      form={form}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      error={error}
+    />
+   */
   const text = textMap[type];
+  /*
+  const textMap = {
+  login: '로그인',
+  register: '회원가입',
+};
+   */
   return (
     <AuthFormBlock>
       <h3>{text}</h3>
